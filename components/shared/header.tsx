@@ -37,7 +37,7 @@ export const Header: React.FC<Props> = ({ className }) => {
 
           <div>
             <Button className='group relative'>
-              <b>25 €</b>
+              <strong>25 €</strong>
               <span className='h-full w-[1px] bg-white/30 mx-3'></span>
               <div className='flex items-center gap-1 transition duration-300 group-hover:opacity-0'>
                 <ShoppingCart
@@ -45,7 +45,7 @@ export const Header: React.FC<Props> = ({ className }) => {
                   className='h-4 w-4 relative'
                   strokeWidth={2}
                 />
-                <b>3</b>
+                <strong>3</strong>
               </div>
               <ArrowRight
                 size={20}
