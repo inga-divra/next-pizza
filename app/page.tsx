@@ -1,10 +1,9 @@
-import { Button } from '@/components/ui/button';
+import { Header } from '@/components/shared/header';
 
 export default function Home() {
   return (
-    <div className='m-8'>
-      <h1 className='mb-5'>Home</h1>
-      <Button>Cart</Button>
-    </div>
+    <>
+      <h1>Home</h1>
+    </>
   );
 }
