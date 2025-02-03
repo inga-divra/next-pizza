@@ -2,6 +2,7 @@ import React from 'react';
 import { Title } from './title';
 import { FilterCheckbox } from './filter-checkbox';
 import { Input } from '../ui';
+import { RangeSlider } from './range-slider';
 
 interface Props {
   className?: string;
@@ -44,10 +45,12 @@ export const Filters: React.FC<Props> = ({ className }) => {
             placeholder='Max'
             min={0}
             max={1000}
-            defaultValue={300000}
+            defaultValue={1000}
             aria-label='Maximum price'
           />
         </div>
+        {/* range slider*/}
+        <RangeSlider min={0} max={5000} step={10} value={[0, 5000]} />
       </div>
 
       {/* Ingredients filtering */}
