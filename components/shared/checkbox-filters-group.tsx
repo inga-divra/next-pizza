@@ -13,8 +13,8 @@ interface Props {
   limit?: number;
   loading?: boolean;
   searchInputPlaceholder?: string;
-  onChange?: (values: string[]) => void; // eslint-disable-line @typescript-eslint/no-unused-vars
-  defaultValue?: string[]; // eslint-disable-line @typescript-eslint/no-unused-vars
+  // onChange?: (values: string[]) => void;
+  // defaultValue?: string[];
   className?: string;
 }
 
