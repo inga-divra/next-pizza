@@ -26,8 +26,8 @@ export default function Home() {
             <div className='flex flex-col gap-16'>
               <ProductCard
                 id={1}
-                name='Cheeseburger pizza'
-                price={12.9}
+                name='Cheeseburger'
+                price={11.25}
                 imageUrl='https://media.dodostatic.com/image/r:292x292/11ee7d5f4698bcd1bccacdd735d41e05.avif'
               />
             </div>
