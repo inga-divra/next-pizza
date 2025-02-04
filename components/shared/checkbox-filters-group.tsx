@@ -13,10 +13,11 @@ interface Props {
   limit?: number;
   loading?: boolean;
   searchInputPlaceholder?: string;
-  onChange?: (values: string[]) => void;
-  defaultValue?: string[];
+  onChange?: (values: string[]) => void; // eslint-disable-line @typescript-eslint/no-unused-vars
+  defaultValue?: string[]; // eslint-disable-line @typescript-eslint/no-unused-vars
   className?: string;
 }
+
 export const CheckboxFiltersGroup: React.FC<Props> = ({
   title,
   items,
@@ -28,7 +29,17 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
   defaultValue,
 }) => {
   const [showAll, setShowAll] = useState(false);
-  const ingredients = showAll ? items : defaultItems?.slice(0, limit);
+  const [searchValue, setSearchValue] = useState('');
+
+  const onChangeSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+  };
+
+  const ingredients = showAll
+    ? items.filter((item) =>
+        item.text.toLowerCase().includes(searchValue.toLocaleLowerCase())
+      )
+    : defaultItems?.slice(0, limit);
 
   return (
     <div className={className}>
@@ -39,6 +50,7 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
           <Input
             className='bg-gray-50 border-none'
             placeholder={searchInputPlaceholder}
+            onChange={onChangeSearchInput}
           />
         </div>
       )}
