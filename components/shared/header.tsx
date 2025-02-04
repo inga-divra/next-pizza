@@ -22,7 +22,7 @@ export const Header: React.FC<Props> = ({ className }) => {
           />
           <div>
             <p className='text-2xl uppercase font-black'>Next Pizza</p>
-            <p className='text-sm capitalize text-gray-400 leading-3'>
+            <p className='text-sm  text-gray-400 leading-3'>
               pure pizza perfection
             </p>
           </div>
