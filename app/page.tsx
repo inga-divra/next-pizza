@@ -143,6 +143,61 @@ export default function Home() {
                 ]}
                 categoryId={1}
               />
+              <ProductsGroupList
+                title='Desserts'
+                items={[
+                  {
+                    id: 1,
+                    name: 'Fondant',
+                    imageUrl:
+                      'https://media.dodostatic.com/image/r:292x292/11eeedc83c85e47c98b1ce69cbfaadcf.avif',
+                    items: [{ price: 4.2 }],
+                  },
+                  {
+                    id: 2,
+                    name: 'Sweet cinnamon rolls',
+                    imageUrl:
+                      'https://media.dodostatic.com/image/r:292x292/11ee96c5b9b5593a953dd3b99d1021b9.avif',
+                    items: [{ price: 3.65 }],
+                  },
+                  {
+                    id: 3,
+                    name: 'Cottage cheese fritters',
+                    imageUrl:
+                      'https://media.dodostatic.com/image/r:292x292/11ef20469e20c57eae649428265d3e35.avif',
+                    items: [{ price: 4.8 }],
+                  },
+                  {
+                    id: 4,
+                    name: 'Chocolate muffin ',
+                    imageUrl:
+                      'https://media.dodostatic.com/image/r:292x292/11ef2047d166be70b21af4e4b01de920.avif',
+                    items: [{ price: 2.95 }],
+                  },
+                  {
+                    id: 5,
+                    name: 'Caramel muffin ',
+                    imageUrl:
+                      'https://media.dodostatic.com/image/r:292x292/11ef2047bda49075aea54ad8e556486a.avif',
+                    items: [{ price: 2.95 }],
+                  },
+                  {
+                    id: 6,
+                    name: 'Chocolate Donut ',
+                    imageUrl:
+                      'https://media.dodostatic.com/image/r:292x292/11ef2046bf2f3150abf3e681bbfd7513.avif',
+                    items: [{ price: 2.95 }],
+                  },
+                  {
+                    id: 7,
+                    name: 'Caramel Donut ',
+                    imageUrl:
+                      'https://media.dodostatic.com/image/r:292x292/11ef2046cc9529dda57f63536c76de10.avif',
+                    items: [{ price: 2.95 }],
+                  },
+                ]}
+                categoryId={1}
+              />
             </div>
           </div>
         </div>
