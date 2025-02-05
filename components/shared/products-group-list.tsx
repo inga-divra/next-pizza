@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useEffect } from 'react';
 import { Title } from './title';
 import { cn } from '@/lib/utils';
@@ -43,6 +44,7 @@ export const ProductsGroupList: React.FC<Props> = ({
       setActiveCategoryId(categoryId);
     }
   }, [categoryId, intersection?.isIntersecting, title]);
+
   return (
     <div className={className} id={title} ref={intersectionRef}>
       <Title text={title} size='lg' className='font-extrabold mb-5' />

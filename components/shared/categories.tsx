@@ -9,12 +9,12 @@ interface Props {
 }
 
 const cats = [
-  { id: 0, name: 'Pizzas' },
-  { id: 1, name: 'Snacks' },
-  { id: 2, name: 'Desserts' },
-  { id: 3, name: 'Coffee' },
-  { id: 4, name: 'Cocktails' },
-  { id: 5, name: 'Drinks' },
+  { id: 1, name: 'Pizzas' },
+  { id: 2, name: 'Snacks' },
+  { id: 3, name: 'Desserts' },
+  { id: 4, name: 'Coffee' },
+  { id: 5, name: 'Cocktails' },
+  { id: 6, name: 'Drinks' },
 ];
 
 export const Categories: React.FC<Props> = ({ className }) => {
@@ -28,8 +28,9 @@ export const Categories: React.FC<Props> = ({ className }) => {
           className={cn(
             'flex items-center font-bold h-11 rounded-2xl px-5',
             categoryActiveId === id &&
-              'bg-white shadow-md shadow-gray-50 text-primary'
+              'bg-white shadow-md shadow-gray-200 text-primary'
           )}
+          href={`/#${name}`}
           key={index}
         >
           <button>{name}</button>
