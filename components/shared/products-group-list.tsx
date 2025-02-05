@@ -24,14 +24,13 @@ interface Props {
 }
 
 export const ProductsGroupList: React.FC<Props> = ({
-  title,
   items,
   listClassName,
   className,
 }) => {
   return (
     <div className={className}>
-      <Title text={title} size='lg' className='font-extrabold mb-5' />
+      <Title text='Pizzas' size='lg' className='font-extrabold mb-5' />
       <div className={cn('grid grid-cols-3 gap-[50px]', listClassName)}>
         {items.map((product) => (
           <ProductCard
