@@ -81,6 +81,68 @@ export default function Home() {
                 ]}
                 categoryId={1}
               />
+              <ProductsGroupList
+                title='Snacks'
+                items={[
+                  {
+                    id: 1,
+                    name: 'Truffle Chicken Dodster ',
+                    imageUrl:
+                      'https://media.dodostatic.com/image/r:292x292/11ef87d1152560abb7b28c274276213f.avif',
+                    items: [{ price: 4.5 }],
+                  },
+                  {
+                    id: 2,
+                    name: 'Dodster ',
+                    imageUrl:
+                      'https://media.dodostatic.com/image/r:292x292/11ee7d5f578e4dd9b8f840a88ae1f1a9.avif',
+                    items: [{ price: 3.9 }],
+                  },
+                  {
+                    id: 3,
+                    name: 'Chilli Dodster ',
+                    imageUrl:
+                      'https://media.dodostatic.com/image/r:292x292/11ee7d5f585df060b6a542935fcb9ec1.avif',
+                    items: [{ price: 4.1 }],
+                  },
+                  {
+                    id: 4,
+                    name: 'Cheese starter',
+                    imageUrl:
+                      'https://media.dodostatic.com/image/r:292x292/11eed23fdb5774a6b40a8e591d512dc6.avif',
+                    items: [{ price: 4.1 }],
+                  },
+                  {
+                    id: 5,
+                    name: 'Mushrooms starter',
+                    imageUrl:
+                      'https://media.dodostatic.com/image/r:292x292/11ef2045d1b1bb758c5f92e794fada2a.avif',
+                    items: [{ price: 4.1 }],
+                  },
+                  {
+                    id: 6,
+                    name: 'Spicy starter',
+                    imageUrl:
+                      'https://media.dodostatic.com/image/r:292x292/11ef2045e9e56fa8baf92147210aa947.avif',
+                    items: [{ price: 4.1 }],
+                  },
+                  {
+                    id: 7,
+                    name: 'Chicken wings',
+                    imageUrl:
+                      'https://media.dodostatic.com/image/r:292x292/11ee7d5f5a190745b53cb3f5db064715.avif',
+                    items: [{ price: 5.6 }],
+                  },
+                  {
+                    id: 8,
+                    name: 'Salad Caesar ',
+                    imageUrl:
+                      'https://media.dodostatic.com/image/r:292x292/11ee7d5f5aa23d78ba1904d240066583.avif',
+                    items: [{ price: 5.2 }],
+                  },
+                ]}
+                categoryId={1}
+              />
             </div>
           </div>
         </div>
