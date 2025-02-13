@@ -1,4 +1,4 @@
-import { categories } from "./constants";
+import { categories, ingredients } from "./constants";
 import { prisma } from "./prisma-client";
 import { hashSync } from "bcryptjs";
 
@@ -29,10 +29,22 @@ async function up() {
     await prisma.category.createMany({
         data: categories
     });
+
+    await prisma.ingredient.createMany({
+        data: ingredients
+    })
 }
 
 async function down() {
-    await prisma.$executeRaw`TRUNCATE TABLE "User" RESTART IDENTITY CASCADE;`;
+    await prisma.ingredient.deleteMany();
+    await prisma.category.deleteMany();
+    await prisma.user.deleteMany();
+
+    // Reset sequences for all tables with auto-increment
+    await prisma.$executeRawUnsafe(`ALTER SEQUENCE "User_id_seq" RESTART WITH 1`);
+    await prisma.$executeRawUnsafe(`ALTER SEQUENCE "Category_id_seq" RESTART WITH 1`);
+    await prisma.$executeRawUnsafe(`ALTER SEQUENCE "Ingredient_id_seq" RESTART WITH 1`);
+
 }
 
 async function main() {
