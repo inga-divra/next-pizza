@@ -1,3 +1,4 @@
+import { categories } from "./constants";
 import { prisma } from "./prisma-client";
 import { hashSync } from "bcryptjs";
 
@@ -23,9 +24,13 @@ async function up() {
                 providerId: '67890'
             },
         ]
-    })
+    });
 
+    await prisma.category.createMany({
+        data: categories
+    });
 }
+
 async function down() {
     await prisma.$executeRaw`TRUNCATE TABLE "User" RESTART IDENTITY CASCADE;`;
 }
