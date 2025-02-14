@@ -79,3 +79,91 @@ export const ingredients = [
         imageUrl: 'https://cdn.dodostatic.net/static/Img/Ingredients/e5c17ba0a8114e11a50b82e57a448063.png',
     },
 ].map((obj, index) => ({ id: index + 1, ...obj }));
+
+export const products = [
+    {
+        name: 'Omelet with Ham and Mushrooms',
+        imageUrl: 'https://media.dodostatic.com/image/r:292x292/01934f4b53b7777d9465289e8b55854b.avif',
+        categoryId: 2,
+    },
+    {
+        name: 'Pepperoni Omelet',
+        imageUrl: 'https://media.dodostatic.com/image/r:292x292/01934f4b53b7777d9465289e8b55854b.avif',
+        categoryId: 2,
+    },
+    {
+        name: 'Coffee Latte',
+        imageUrl: 'https://media.dodostatic.com/image/r:292x292/01934f4b53b7777d9465289e8b55854b.avif',
+        categoryId: 2,
+    },
+    {
+        name: 'Denwich Ham and Cheese',
+        imageUrl: 'https://media.dodostatic.com/image/r:292x292/01934f4b53b7777d9465289e8b55854b.avif',
+        categoryId: 3,
+    },
+    {
+        name: 'Chicken Nuggets',
+        imageUrl: 'https://media.dodostatic.com/image/r:292x292/01934f4b53b7777d9465289e8b55854b.avif',
+        categoryId: 3,
+    },
+    {
+        name: 'Baked Potatoes with Sauce 🌱',
+        imageUrl: 'https://media.dodostatic.com/image/r:292x292/01934f4b53b7777d9465289e8b55854b.avif',
+        categoryId: 3,
+    },
+    {
+        name: 'Dodster',
+        imageUrl: 'https://media.dodostatic.com/image/r:292x292/01934f4b53b7777d9465289e8b55854b.avif',
+        categoryId: 3,
+    },
+    {
+        name: 'Spicy Dodster 🌶️🌶️',
+        imageUrl: 'https://media.dodostatic.com/image/r:292x292/01934f4b53b7777d9465289e8b55854b.avif',
+        categoryId: 3,
+    },
+    {
+        name: 'Banana Milkshake',
+        imageUrl: 'https://media.dodostatic.com/image/r:292x292/01934f4b53b7777d9465289e8b55854b.avif',
+        categoryId: 4,
+    },
+    {
+        name: 'Caramel Apple Milkshake',
+        imageUrl: 'https://media.dodostatic.com/image/r:292x292/01934f4b53b7777d9465289e8b55854b.avif',
+        categoryId: 4,
+    },
+    {
+        name: 'Milkshake with Oreo Cookies',
+        imageUrl: 'https://media.dodostatic.com/image/r:292x292/01934f4b53b7777d9465289e8b55854b.avif',
+        categoryId: 4,
+    },
+    {
+        name: 'Classic Milkshake 👶',
+        imageUrl: 'https://media.dodostatic.com/image/r:292x292/01934f4b53b7777d9465289e8b55854b.avif',
+        categoryId: 4,
+    },
+    {
+        name: 'Irish Cappuccino',
+        imageUrl: 'https://media.dodostatic.com/image/r:292x292/01934f4b53b7777d9465289e8b55854b.avif',
+        categoryId: 5,
+    },
+    {
+        name: 'Caramel Cappuccino',
+        imageUrl: 'https://media.dodostatic.com/image/r:292x292/01934f4b53b7777d9465289e8b55854b.avif',
+        categoryId: 5,
+    },
+    {
+        name: 'Coconut Latte',
+        imageUrl: 'https://media.dodostatic.com/image/r:292x292/01934f4b53b7777d9465289e8b55854b.avif',
+        categoryId: 5,
+    },
+    {
+        name: 'Americano Coffee',
+        imageUrl: 'https://media.dodostatic.com/image/r:292x292/01934f4b53b7777d9465289e8b55854b.avif',
+        categoryId: 5,
+    },
+    {
+        name: 'Coffee Latte',
+        imageUrl: 'https://media.dodostatic.com/image/r:292x292/01934f4b53b7777d9465289e8b55854b.avif',
+        categoryId: 5,
+    },
+];
