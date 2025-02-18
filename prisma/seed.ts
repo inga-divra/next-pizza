@@ -120,6 +120,7 @@ async function up() {
 }
 
 async function down() {
+    await prisma.productVariation.deleteMany();
     await prisma.product.deleteMany();
     await prisma.ingredient.deleteMany();
     await prisma.category.deleteMany();
@@ -129,6 +130,8 @@ async function down() {
     await prisma.$executeRawUnsafe(`ALTER SEQUENCE "User_id_seq" RESTART WITH 1`);
     await prisma.$executeRawUnsafe(`ALTER SEQUENCE "Category_id_seq" RESTART WITH 1`);
     await prisma.$executeRawUnsafe(`ALTER SEQUENCE "Ingredient_id_seq" RESTART WITH 1`);
+    await prisma.$executeRawUnsafe(`ALTER SEQUENCE "Product_id_seq" RESTART WITH 1`);
+    await prisma.$executeRawUnsafe(`ALTER SEQUENCE "ProductVariation_id_seq" RESTART WITH 1`); // <-- ВАЖНО
 }
 
 
