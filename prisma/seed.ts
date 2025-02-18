@@ -137,6 +137,32 @@ async function up() {
         ]
     });
 
+    await prisma.cart.createMany({
+        data: [
+            {
+                userId: 1,
+                totalAmount: 0,
+                token: '11111',
+            },
+            {
+                userId: 2,
+                totalAmount: 0,
+                token: '222222',
+            },
+        ],
+    });
+
+    await prisma.cartItem.create({
+        data: {
+            productVariationId: 1,
+            cartId: 1,
+            quantity: 2,
+            ingredients: {
+                connect: [{ id: 1 }, { id: 2 }, { id: 3 }],
+            },
+        },
+    });
+
 }
 
 async function down() {
@@ -145,14 +171,19 @@ async function down() {
     await prisma.ingredient.deleteMany();
     await prisma.category.deleteMany();
     await prisma.user.deleteMany();
+    await prisma.cartItem.deleteMany();
+    await prisma.cart.deleteMany();
 
     // Reset sequences for all tables with auto-increment
     await prisma.$executeRawUnsafe(`ALTER SEQUENCE "User_id_seq" RESTART WITH 1`);
     await prisma.$executeRawUnsafe(`ALTER SEQUENCE "Category_id_seq" RESTART WITH 1`);
     await prisma.$executeRawUnsafe(`ALTER SEQUENCE "Ingredient_id_seq" RESTART WITH 1`);
     await prisma.$executeRawUnsafe(`ALTER SEQUENCE "Product_id_seq" RESTART WITH 1`);
-    await prisma.$executeRawUnsafe(`ALTER SEQUENCE "ProductVariation_id_seq" RESTART WITH 1`); // <-- ВАЖНО
+    await prisma.$executeRawUnsafe(`ALTER SEQUENCE "ProductVariation_id_seq" RESTART WITH 1`);
+    await prisma.$executeRawUnsafe(`ALTER SEQUENCE "Cart_id_seq" RESTART WITH 1`);
+    await prisma.$executeRawUnsafe(`ALTER SEQUENCE "CartItem_id_seq" RESTART WITH 1`);
 }
+
 
 
 async function main() {
