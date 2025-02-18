@@ -1,6 +1,28 @@
+import { Prisma } from "@prisma/client";
 import { categories, ingredients, products } from "./constants";
 import { prisma } from "./prisma-client";
 import { hashSync } from "bcryptjs";
+
+const randomDecimalNumber = (min: number, max: number) => {
+    return Math.floor(Math.random() * (max - min) * 10 + min * 10) / 10;
+};
+
+const generateProductVariation = ({
+    productId,
+    pizzaType,
+    size,
+}: {
+    productId: number;
+    pizzaType?: 1 | 2;
+    size?: 20 | 30 | 40;
+}) => {
+    return {
+        productId,
+        price: randomDecimalNumber(18, 20),
+        pizzaType,
+        size,
+    } as Prisma.ProductVariationUncheckedCreateInput;
+};
 
 async function up() {
     await prisma.user.createMany({
@@ -36,6 +58,64 @@ async function up() {
 
     await prisma.product.createMany({
         data: products
+    })
+
+    const pizza1 = await prisma.product.create({
+        data: {
+            name: 'Double Pepperoni',
+            imageUrl:
+                'https://media.dodostatic.com/image/r:292x292/11ee7d5f33a248b5bb9d9c4f410466fb.avif',
+            categoryId: 1,
+            ingredients: {
+                connect: ingredients.slice(0, 5),
+            },
+        },
+    });
+
+    const pizza2 = await prisma.product.create({
+        data: {
+            name: 'Cheeseburger',
+            imageUrl:
+                'https://media.dodostatic.com/image/r:292x292/11ee7d5f4698bcd1bccacdd735d41e05.avif',
+            categoryId: 1,
+            ingredients: {
+                connect: ingredients.slice(5, 10),
+            },
+        },
+    });
+
+    const pizza3 = await prisma.product.create({
+        data: {
+            name: '4 Seasons',
+            imageUrl:
+                'https://media.dodostatic.com/image/r:292x292/11ee7d5f30691feb850d840e4f58c274.avif',
+            categoryId: 1,
+            ingredients: {
+                connect: ingredients.slice(10, 40),
+            },
+        },
+    });
+
+    await prisma.productVariation.createMany({
+        data: [
+            // Pizza 'Double Pepperoni'
+            generateProductVariation({ productId: pizza1.id, pizzaType: 1, size: 20 }),
+            generateProductVariation({ productId: pizza1.id, pizzaType: 2, size: 30 }),
+            generateProductVariation({ productId: pizza1.id, pizzaType: 2, size: 40 }),
+
+            // Pizza 'Cheeseburger'
+            generateProductVariation({ productId: pizza2.id, pizzaType: 1, size: 20 }),
+            generateProductVariation({ productId: pizza2.id, pizzaType: 1, size: 30 }),
+            generateProductVariation({ productId: pizza2.id, pizzaType: 1, size: 40 }),
+            generateProductVariation({ productId: pizza2.id, pizzaType: 2, size: 20 }),
+            generateProductVariation({ productId: pizza2.id, pizzaType: 2, size: 30 }),
+            generateProductVariation({ productId: pizza2.id, pizzaType: 2, size: 40 }),
+
+            // Pizza '4 Seasons'
+            generateProductVariation({ productId: pizza3.id, pizzaType: 1, size: 20 }),
+            generateProductVariation({ productId: pizza3.id, pizzaType: 2, size: 30 }),
+            generateProductVariation({ productId: pizza3.id, pizzaType: 2, size: 40 }),
+        ]
     })
 }
 
