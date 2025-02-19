@@ -4,6 +4,8 @@ import { Container } from './container';
 import Image from 'next/image';
 import { Button } from '../ui';
 import { ArrowRight, ShoppingCart, User } from 'lucide-react';
+import Link from 'next/link';
+import { SearchInput } from './search-input';
 
 interface Props {
   className?: string;
@@ -13,21 +15,26 @@ export const Header: React.FC<Props> = ({ className }) => {
     <header className={cn('border border-b', className)}>
       <Container className='flex items-center justify-between py-8'>
         {/* Left side */}
-        <div className='flex items-center gap-4'>
-          <Image
-            src='/logo.png'
-            alt='Next Pizza official logo'
-            width={35}
-            height={35}
-          />
-          <div>
-            <p className='text-2xl uppercase font-black'>Next Pizza</p>
-            <p className='text-sm  text-gray-400 leading-3'>
-              pure pizza perfection
-            </p>
+        <Link href='/'>
+          <div className='flex items-center gap-4'>
+            <Image
+              src='/logo.png'
+              alt='Next Pizza official logo'
+              width={35}
+              height={35}
+            />
+            <div>
+              <p className='text-2xl uppercase font-black'>Next Pizza</p>
+              <p className='text-sm  text-gray-400 leading-3'>
+                pure pizza perfection
+              </p>
+            </div>
           </div>
+        </Link>
+        {/* Search */}
+        <div className='mx-10 flex-1'>
+          <SearchInput />
         </div>
-
         {/* Right side */}
         <div className='flex items-center gap-3'>
           <Button className='flex items-center gap-1' variant='outline'>
