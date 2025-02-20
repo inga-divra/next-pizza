@@ -1,9 +1,10 @@
 'use client';
 import { cn } from '@/lib/utils';
+import { Api } from '@/services/api-client';
 import { Search } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useClickAway } from 'react-use';
 
 interface Props {
@@ -11,13 +12,17 @@ interface Props {
 }
 
 export const SearchInput: React.FC<Props> = ({ className }) => {
-  const [focused, setFocused] = React.useState(false);
+  const [focused, setFocused] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const ref = React.useRef<HTMLDivElement>(null);
 
   useClickAway(ref, () => {
     setFocused(false);
   });
 
+  useEffect(() => {
+    Api.products.search(searchQuery);
+  }, [searchQuery]);
   return (
     <>
       {focused && (
@@ -41,6 +46,8 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
           placeholder='Search...'
           aria-label='Search products'
           onFocus={() => setFocused(true)}
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
 
         <div
