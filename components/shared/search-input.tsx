@@ -68,6 +68,7 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
                 src='https://media.dodostatic.com/image/r:292x292/11ef2c97c3c349639cff50017b8bca8f.avif'
                 alt='Pizza 1'
                 fill={true}
+                sizes='32px'
                 style={{ objectFit: 'cover' }}
               />
             </div>
