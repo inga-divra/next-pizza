@@ -4,8 +4,8 @@ import { Api } from '@/services/api-client';
 import { Search } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
-import { useClickAway } from 'react-use';
+import React, { useState } from 'react';
+import { useClickAway, useDebounce } from 'react-use';
 import { Product } from '@prisma/client';
 
 interface Props {
@@ -22,23 +22,26 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
     setFocused(false);
   });
 
-  useEffect(() => {
-    // Fetch products based on the search query
-    const fetchProducts = async () => {
-      if (!searchQuery.trim()) {
-        setProducts([]); // Clear the list when the search query is empty
-        return;
-      }
-      try {
-        const products = await Api.products.search(searchQuery);
-        setProducts(products);
-      } catch (error) {
-        console.error('Error while searching for products:', error);
-      }
-    };
+  useDebounce(
+    () => {
+      const fetchProducts = async () => {
+        if (!searchQuery.trim()) {
+          setProducts([]); // Clear the list when the search query is empty
+          return;
+        }
+        try {
+          const products = await Api.products.search(searchQuery);
+          setProducts(products);
+        } catch (error) {
+          console.error('Error while searching for products:', error);
+        }
+      };
 
-    fetchProducts();
-  }, [searchQuery]);
+      fetchProducts();
+    },
+    250,
+    [searchQuery]
+  );
 
   return (
     <>
