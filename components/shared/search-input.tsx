@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { useClickAway } from 'react-use';
+import { Product } from '@prisma/client';
 
 interface Props {
   className?: string;
@@ -14,6 +15,7 @@ interface Props {
 export const SearchInput: React.FC<Props> = ({ className }) => {
   const [focused, setFocused] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [products, setProducts] = useState<Product[]>([]);
   const ref = React.useRef<HTMLDivElement>(null);
 
   useClickAway(ref, () => {
@@ -21,8 +23,23 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
   });
 
   useEffect(() => {
-    Api.products.search(searchQuery);
+    // Fetch products based on the search query
+    const fetchProducts = async () => {
+      if (!searchQuery.trim()) {
+        setProducts([]); // Clear the list when the search query is empty
+        return;
+      }
+      try {
+        const products = await Api.products.search(searchQuery);
+        setProducts(products);
+      } catch (error) {
+        console.error('Error while searching for products:', error);
+      }
+    };
+
+    fetchProducts();
   }, [searchQuery]);
+
   return (
     <>
       {focused && (
@@ -36,6 +53,7 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
           className
         )}
       >
+        {/* Search icon */}
         <Search
           className='absolute left-3 top-1/2 h-5 -translate-y-1/2 text-gray-400'
           aria-hidden='true'
@@ -50,31 +68,38 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
           onChange={(e) => setSearchQuery(e.target.value)}
         />
 
-        <div
-          className={cn(
-            'absolute w-full bg-white rounded-xl py-2 top-14 shadow-md transition-all duration-200 invisible opacity-0 z-30',
-            focused && 'visible opacity-100 top-12'
-          )}
-          role='listbox'
-        >
-          <Link
-            className='flex items-center w-full px-3 py-2 hover:bg-primary/10'
-            href={`/product/1`}
-            role='option'
+        {focused && products.length > 0 && (
+          <div
+            className='absolute w-full bg-white rounded-xl py-2 top-14 shadow-md transition-all duration-200 z-30'
+            role='listbox'
           >
-            <div className='relative w-8 h-8'>
-              <Image
-                className='rounded-sm object-cover'
-                src='https://media.dodostatic.com/image/r:292x292/11ef2c97c3c349639cff50017b8bca8f.avif'
-                alt='Pizza 1'
-                fill={true}
-                sizes='32px'
-                style={{ objectFit: 'cover' }}
-              />
-            </div>
-            <span className='px-3 py-2'>Pizza 1</span>
-          </Link>
-        </div>
+            {products.map((product) => (
+              <Link
+                className='flex items-center w-full px-3 py-2 hover:bg-primary/10'
+                role='option'
+                key={product.id}
+                href={`/product/${product.id}`}
+              >
+                <div className='relative w-8 h-8'>
+                  <Image
+                    className='rounded-sm object-cover'
+                    src={
+                      product.imageUrl ||
+                      'https://media.dodostatic.com/image/r:292x292/11ee7d5f5231c89db0db6fea7369a1d7.avif'
+                    }
+                    alt={product.name || 'Product'}
+                    fill={true}
+                    sizes='32px'
+                    style={{ objectFit: 'cover' }}
+                  />
+                </div>
+                <span className='px-3 py-2'>
+                  {product.name || 'Unnamed Product'}
+                </span>
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </>
   );
