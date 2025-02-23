@@ -166,13 +166,13 @@ async function up() {
 }
 
 async function down() {
+    await prisma.cartItem.deleteMany();
+    await prisma.cart.deleteMany();
     await prisma.productVariation.deleteMany();
     await prisma.product.deleteMany();
     await prisma.ingredient.deleteMany();
     await prisma.category.deleteMany();
     await prisma.user.deleteMany();
-    await prisma.cartItem.deleteMany();
-    await prisma.cart.deleteMany();
 
     // Reset sequences for all tables with auto-increment
     await prisma.$executeRawUnsafe(`ALTER SEQUENCE "User_id_seq" RESTART WITH 1`);
@@ -183,6 +183,8 @@ async function down() {
     await prisma.$executeRawUnsafe(`ALTER SEQUENCE "Cart_id_seq" RESTART WITH 1`);
     await prisma.$executeRawUnsafe(`ALTER SEQUENCE "CartItem_id_seq" RESTART WITH 1`);
 }
+
+
 
 
 

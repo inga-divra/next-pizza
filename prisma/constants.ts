@@ -82,28 +82,28 @@ export const ingredients = [
 
 export const products = [
     {
-        name: 'Omelet with Ham and Mushrooms',
-        imageUrl: 'https://media.dodostatic.com/image/r:292x292/01934f4b53b7777d9465289e8b55854b.avif',
+        name: 'Truffle Chicken Dodster',
+        imageUrl: 'https://media.dodostatic.com/image/r:292x292/11ef87d1152560abb7b28c274276213f.avif',
         categoryId: 2,
     },
     {
-        name: 'Pepperoni Omelet',
-        imageUrl: 'https://media.dodostatic.com/image/r:292x292/01934f4b53b7777d9465289e8b55854b.avif',
+        name: 'Pepperoni rolls',
+        imageUrl: 'https://media.dodostatic.com/image/r:292x292/11ee96c94a1ad044b0a88a81e24f3a11.avif',
         categoryId: 2,
     },
     {
         name: 'Coffee Latte',
-        imageUrl: 'https://media.dodostatic.com/image/r:292x292/01934f4b53b7777d9465289e8b55854b.avif',
+        imageUrl: 'https://media.dodostatic.com/image/r:292x292/11ef2a58598d4480acd43a684b0b06bf.avif',
         categoryId: 2,
     },
     {
-        name: 'Denwich Ham and Cheese',
-        imageUrl: 'https://media.dodostatic.com/image/r:292x292/01934f4b53b7777d9465289e8b55854b.avif',
+        name: 'Chocolate muffin',
+        imageUrl: 'https://media.dodostatic.com/image/r:292x292/11ef2047d166be70b21af4e4b01de920.avif',
         categoryId: 3,
     },
     {
-        name: 'Chicken Nuggets',
-        imageUrl: 'https://media.dodostatic.com/image/r:292x292/01934f4b53b7777d9465289e8b55854b.avif',
+        name: 'Cottage cheese fritters',
+        imageUrl: 'https://media.dodostatic.com/image/r:292x292/11ef20469e20c57eae649428265d3e35.avif',
         categoryId: 3,
     },
     {

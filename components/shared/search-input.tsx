@@ -25,10 +25,6 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
   useDebounce(
     () => {
       const fetchProducts = async () => {
-        if (!searchQuery.trim()) {
-          setProducts([]); // Clear the list when the search query is empty
-          return;
-        }
         try {
           const products = await Api.products.search(searchQuery);
           setProducts(products);
@@ -36,7 +32,6 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
           console.error('Error while searching for products:', error);
         }
       };
-
       fetchProducts();
     },
     250,
