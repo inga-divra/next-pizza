@@ -38,6 +38,12 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
     [searchQuery]
   );
 
+  const onClickItem = () => {
+    setFocused(false);
+    setSearchQuery('');
+    setProducts([]);
+  };
+
   return (
     <>
       {focused && (
@@ -77,6 +83,7 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
                 role='option'
                 key={product.id}
                 href={`/product/${product.id}`}
+                onClick={onClickItem}
               >
                 <div className='relative w-8 h-8'>
                   <Image
