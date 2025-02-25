@@ -32,8 +32,8 @@ export const Filters: React.FC<Props> = ({ className }) => {
       <fieldset className='flex flex-col gap-4'>
         <legend className='sr-only'>Product Type Filter</legend>{' '}
         {/* Hidden heading for accessibility */}
-        <FilterCheckbox text='Customizable' value='1' />
-        <FilterCheckbox text='New Arrivals' value='2' />
+        <FilterCheckbox text='Customizable' value='1' name='productType' />
+        <FilterCheckbox text='New Arrivals' value='2' name='productType' />
       </fieldset>
 
       {/* PRICE FILTERING */}
@@ -67,6 +67,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
       {/* Ingredients filtering */}
       <CheckboxFiltersGroup
         title='Ingredients'
+        name='ingredients'
         className='mt-5'
         limit={6}
         defaultItems={items.slice(0, 6)}
