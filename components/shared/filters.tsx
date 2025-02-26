@@ -11,13 +11,28 @@ import { useFilterIngredients } from '@/hooks/useFilterIngredients';
 interface Props {
   className?: string;
 }
+
+interface PriceProps {
+  priceFrom: number;
+  priceTo: number;
+}
 export const Filters: React.FC<Props> = ({ className }) => {
-  const { ingredients, loading, onAddId } = useFilterIngredients();
+  const { ingredients, loading, onAddId, selectedIds } = useFilterIngredients();
+  const [prices, setPrice] = React.useState<PriceProps>({
+    priceFrom: 0,
+    priceTo: 1000,
+  });
 
   const items = ingredients.map((ingredient) => ({
     value: String(ingredient.id),
     text: ingredient.name,
   }));
+
+  const updatePrice = (name: keyof PriceProps, value: number) =>
+    setPrice({
+      ...prices,
+      [name]: value,
+    });
 
   return (
     <div className={className}>
@@ -49,6 +64,8 @@ export const Filters: React.FC<Props> = ({ className }) => {
             max={1000}
             defaultValue={0}
             aria-label='Minimum price'
+            value={String(prices.priceFrom)}
+            onChange={(e) => updatePrice('priceFrom', Number(e.target.value))}
           />
           <span className='self-center font-semibold'>to</span>
           <Input
@@ -58,10 +75,20 @@ export const Filters: React.FC<Props> = ({ className }) => {
             max={1000}
             defaultValue={1000}
             aria-label='Maximum price'
+            value={String(prices.priceTo)}
+            onChange={(e) => updatePrice('priceTo', Number(e.target.value))}
           />
         </div>
         {/* range slider*/}
-        <RangeSlider min={0} max={5000} step={10} value={[0, 5000]} />
+        <RangeSlider
+          min={0}
+          max={1000}
+          step={10}
+          value={[prices.priceFrom, prices.priceTo]}
+          onValueChange={([priceFrom, priceTo]) =>
+            setPrice({ priceFrom, priceTo })
+          }
+        />
       </div>
 
       {/* Ingredients filtering */}
@@ -74,6 +101,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
         items={items}
         loading={loading}
         onClickCheckbox={onAddId}
+        selectedIds={selectedIds}
       />
     </div>
   );
