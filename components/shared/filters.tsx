@@ -1,12 +1,12 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Title } from './title';
-import { FilterCheckbox } from './filter-checkbox';
 import { Input } from '../ui';
 import { RangeSlider } from './range-slider';
 import { CheckboxFiltersGroup } from './checkbox-filters-group';
 import { useFilterIngredients } from '@/hooks/useFilterIngredients';
+import { useSet } from 'react-use';
 
 interface Props {
   className?: string;
@@ -18,7 +18,10 @@ interface PriceProps {
 }
 export const Filters: React.FC<Props> = ({ className }) => {
   const { ingredients, loading, onAddId, selectedIds } = useFilterIngredients();
-  const [prices, setPrice] = React.useState<PriceProps>({
+
+  const [sizes, { toggle: toggleSizes }] = useSet(new Set<string>([]));
+
+  const [prices, setPrice] = useState<PriceProps>({
     priceFrom: 0,
     priceTo: 1000,
   });
@@ -43,13 +46,32 @@ export const Filters: React.FC<Props> = ({ className }) => {
         aria-label='Filters section'
       />
 
-      {/* PRODUCT TYPE FILTERING */}
-      <fieldset className='flex flex-col gap-4'>
-        <legend className='sr-only'>Product Type Filter</legend>{' '}
-        {/* Hidden heading for accessibility */}
-        <FilterCheckbox text='Customizable' value='1' name='productType' />
-        <FilterCheckbox text='New Arrivals' value='2' name='productType' />
-      </fieldset>
+      {/* Dough Type checkboxes */}
+      <CheckboxFiltersGroup
+        title='Dough Type'
+        name='pizzaTypes'
+        className='mb-5'
+        onClickCheckbox={toggleSizes}
+        selected={sizes}
+        items={[
+          { text: 'Thin', value: '1' },
+          { text: 'Traditional', value: '2' },
+        ]}
+      />
+
+      {/* Size Type checkboxes */}
+      <CheckboxFiltersGroup
+        title='Pizza Size'
+        name='sizes'
+        className='mb-5'
+        onClickCheckbox={toggleSizes}
+        selected={sizes}
+        items={[
+          { text: '20cm', value: '20' },
+          { text: '30 cm', value: '30' },
+          { text: '40 cm', value: '40' },
+        ]}
+      />
 
       {/* PRICE FILTERING */}
       <div className='mt-5 border-y border-y-neutral-100 py-6 pb-7'>
@@ -101,7 +123,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
         items={items}
         loading={loading}
         onClickCheckbox={onAddId}
-        selectedIds={selectedIds}
+        selected={selectedIds}
       />
     </div>
   );
