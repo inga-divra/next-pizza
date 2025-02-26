@@ -20,6 +20,9 @@ export const Filters: React.FC<Props> = ({ className }) => {
   const { ingredients, loading, onAddId, selectedIds } = useFilterIngredients();
 
   const [sizes, { toggle: toggleSizes }] = useSet(new Set<string>([]));
+  const [doughTypes, { toggle: toggleDoughTypes }] = useSet(
+    new Set<string>([])
+  );
 
   const [prices, setPrice] = useState<PriceProps>({
     priceFrom: 0,
@@ -49,10 +52,10 @@ export const Filters: React.FC<Props> = ({ className }) => {
       {/* Dough Type checkboxes */}
       <CheckboxFiltersGroup
         title='Dough Type'
-        name='pizzaTypes'
+        name='doughTypes'
         className='mb-5'
-        onClickCheckbox={toggleSizes}
-        selected={sizes}
+        onClickCheckbox={toggleDoughTypes}
+        selected={doughTypes}
         items={[
           { text: 'Thin', value: '1' },
           { text: 'Traditional', value: '2' },
@@ -62,7 +65,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
       {/* Size Type checkboxes */}
       <CheckboxFiltersGroup
         title='Pizza Size'
-        name='sizes'
+        name='pizzaSizes'
         className='mb-5'
         onClickCheckbox={toggleSizes}
         selected={sizes}
