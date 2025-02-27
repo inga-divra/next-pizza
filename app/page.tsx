@@ -1,5 +1,6 @@
 import { Container, Title, TopBar, Filters } from '@/components/shared';
 import { ProductsGroupList } from '@/components/shared/products-group-list';
+import { Suspense } from 'react';
 
 export default function Home() {
   return (
@@ -14,7 +15,9 @@ export default function Home() {
         <div className='flex gap-20'>
           {/* Filtering */}
           <div className='w-64'>
-            <Filters />
+            <Suspense fallback={<div>Loading filters...</div>}>
+              <Filters />
+            </Suspense>
           </div>
           {/* Product List*/}
           <div className='flex-1'>
