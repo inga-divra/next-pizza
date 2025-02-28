@@ -42,7 +42,11 @@ export const Filters: React.FC<Props> = ({ className }) => {
     )
   );
   const [doughTypes, { toggle: toggleDoughTypes }] = useSet(
-    new Set<string>([])
+    new Set<string>(
+      searchParams.get('doughTypes')
+        ? searchParams.get('doughTypes')?.split(',')
+        : []
+    )
   );
 
   const [prices, setPrice] = useState<PriceProps>({
