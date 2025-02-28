@@ -34,7 +34,13 @@ export const Filters: React.FC<Props> = ({ className }) => {
   const { ingredients, loading, onAddId, selectedIngredients } =
     useFilterIngredients();
 
-  const [pizzaSizes, { toggle: toggleSizes }] = useSet(new Set<string>([]));
+  const [pizzaSizes, { toggle: toggleSizes }] = useSet(
+    new Set<string>(
+      searchParams.get('pizzaSizes')
+        ? searchParams.get('pizzaSizes')?.split(',')
+        : []
+    )
+  );
   const [doughTypes, { toggle: toggleDoughTypes }] = useSet(
     new Set<string>([])
   );
