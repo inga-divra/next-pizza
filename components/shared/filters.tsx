@@ -32,7 +32,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
   >;
   const router = useRouter();
   const { ingredients, loading, onAddId, selectedIngredients } =
-    useFilterIngredients();
+    useFilterIngredients(searchParams.get('ingredients')?.split(','));
 
   const [pizzaSizes, { toggle: toggleSizes }] = useSet(
     new Set<string>(
