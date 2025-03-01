@@ -9,15 +9,17 @@ export const useIngredients = () => {
     useEffect(() => {
         async function fetchIngredients() {
             try {
-                setLoading(true)
-                const ingredients = await Api.ingredients.getAll()
-                setIngredients(ingredients)
+                setLoading(true);
+                const ingredients = await Api.ingredients.getAll();
+                if (!ingredients) throw new Error("Ingredients is undefined or null");
+                setIngredients(ingredients);
             } catch (error) {
-                console.log(error)
+                console.error("Error fetching ingredients:", error);
             } finally {
-                setLoading(false)
+                setLoading(false);
             }
         }
+
         fetchIngredients()
     }, [])
 

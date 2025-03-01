@@ -75,9 +75,9 @@ export const Filters: React.FC<Props> = ({ className }) => {
             min={0}
             max={1000}
             aria-label='Minimum price'
-            value={String(filters.prices.priceFrom)}
+            value={String(filters.prices.priceFrom ?? '')}
             onChange={(e) =>
-              filters.setPrices('priceFrom', Number(e.target.value))
+              filters.setPrices('priceFrom', Number(e.target.value) || 0)
             }
           />
           <span className='self-center font-semibold'>to</span>
@@ -87,9 +87,9 @@ export const Filters: React.FC<Props> = ({ className }) => {
             min={0}
             max={1000}
             aria-label='Maximum price'
-            value={String(filters.prices.priceTo)}
+            value={String(filters.prices.priceTo ?? '')}
             onChange={(e) =>
-              filters.setPrices('priceTo', Number(e.target.value))
+              filters.setPrices('priceTo', Number(e.target.value) || 0)
             }
           />
         </div>
