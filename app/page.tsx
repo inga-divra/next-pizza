@@ -1,3 +1,5 @@
+'use client';
+
 import { Container, Title, TopBar, Filters } from '@/components/shared';
 import { ProductsGroupList } from '@/components/shared/products-group-list';
 import { Suspense } from 'react';
