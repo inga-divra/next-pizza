@@ -5,86 +5,39 @@ import { Title } from './title';
 import { Input } from '../ui';
 import { RangeSlider } from './range-slider';
 import { CheckboxFiltersGroup } from './checkbox-filters-group';
-import { useFilterIngredients } from '@/hooks/useFilterIngredients';
-import { useSet } from 'react-use';
 import qs from 'qs';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { useIngredients } from '@/hooks/use-ingredients';
+import { useFilters } from '@/hooks/use-filters';
 
 interface Props {
   className?: string;
 }
 
-interface PriceProps {
-  priceFrom?: number;
-  priceTo?: number;
-}
-
-interface QueryFilters extends PriceProps {
-  pizzaSizes: string;
-  doughTypes: string;
-  ingredients: string;
-}
-
 export const Filters: React.FC<Props> = ({ className }) => {
-  const searchParams = useSearchParams() as unknown as Map<
-    keyof QueryFilters,
-    string
-  >;
   const router = useRouter();
-  const { ingredients, loading, onAddId, selectedIngredients } =
-    useFilterIngredients(searchParams.get('ingredients')?.split(','));
-
-  const [pizzaSizes, { toggle: toggleSizes }] = useSet(
-    new Set<string>(
-      searchParams.get('pizzaSizes')
-        ? searchParams.get('pizzaSizes')?.split(',')
-        : []
-    )
-  );
-  const [doughTypes, { toggle: toggleDoughTypes }] = useSet(
-    new Set<string>(
-      searchParams.get('doughTypes')
-        ? searchParams.get('doughTypes')?.split(',')
-        : []
-    )
-  );
-
-  const [prices, setPrice] = useState<PriceProps>({
-    priceFrom: searchParams.get('priceFrom')
-      ? Number(searchParams.get('priceFrom'))
-      : undefined,
-    priceTo: searchParams.get('priceTo')
-      ? Number(searchParams.get('priceTo'))
-      : undefined,
-  });
+  const { ingredients, loading } = useIngredients();
+  const filters = useFilters();
 
   const items = ingredients.map((ingredient) => ({
     value: String(ingredient.id),
     text: ingredient.name,
   }));
 
-  const updatePrice = (name: keyof PriceProps, value: number) =>
-    setPrice({
-      ...prices,
-      [name]: value,
-    });
-
-  console.log(searchParams, 999);
-
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    const filters = {
-      ...prices,
-      pizzaSizes: Array.from(pizzaSizes),
-      doughTypes: Array.from(doughTypes),
-      selectedIngredients: Array.from(selectedIngredients),
+    const params = {
+      ...filters.prices,
+      pizzaSizes: Array.from(filters.pizzaSizes),
+      doughTypes: Array.from(filters.doughTypes),
+      selectedIngredients: Array.from(filters.selectedIngredients),
     };
 
-    const queryString = qs.stringify(filters, { arrayFormat: 'comma' });
+    const queryString = qs.stringify(params, { arrayFormat: 'comma' });
 
     router.push(`?${queryString}`, { scroll: false });
-  }, [prices, pizzaSizes, doughTypes, selectedIngredients]);
+  }, []);
 
   return (
     <div className={className}>
