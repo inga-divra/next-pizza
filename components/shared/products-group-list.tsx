@@ -7,20 +7,9 @@ import { ProductCard } from './product-card';
 import { useIntersection } from 'react-use';
 import { useCategoryStore } from '@/store/category';
 
-interface ProductVariant {
-  price: number;
-}
-
-interface Product {
-  id: number;
-  name: string;
-  imageUrl: string;
-  items: ProductVariant[];
-}
-
 interface Props {
   title: string;
-  items: Product[];
+  items: any[];
   categoryId: number;
   className?: string;
   listClassName?: string;
@@ -55,7 +44,7 @@ export const ProductsGroupList: React.FC<Props> = ({
             id={product.id}
             name={product.name}
             imageUrl={product.imageUrl}
-            price={product.items[0].price}
+            price={product.items?.[0]?.price ?? 0}
           />
         ))}
       </div>
