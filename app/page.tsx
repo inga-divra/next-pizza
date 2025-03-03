@@ -1,6 +1,5 @@
 import { Container, Title, TopBar, Filters } from '@/components/shared';
 import { ProductsGroupList } from '@/components/shared/products-group-list';
-import { ingredients, products } from '@/prisma/constants';
 import { Suspense } from 'react';
 import { prisma } from '@/prisma/prisma-client';
 export default async function Home() {
@@ -21,7 +20,11 @@ export default async function Home() {
         <Title text='All pizzas' size='lg' className='font-extrabold' />
       </Container>
 
-      <TopBar />
+      <TopBar
+        categories={categories.filter(
+          (category) => category.products.length > 0
+        )}
+      />
 
       <Container className='mt-10 pb-14'>
         <div className='flex gap-20'>
