@@ -7,9 +7,18 @@ import { ProductCard } from './product-card';
 import { useIntersection } from 'react-use';
 import { useCategoryStore } from '@/store/category';
 
+interface Product {
+  id: number;
+  name: string;
+  imageUrl: string;
+  items: {
+    price: number;
+  }[];
+}
+
 interface Props {
   title: string;
-  items: any[];
+  items: Product[];
   categoryId: number;
   className?: string;
   listClassName?: string;
