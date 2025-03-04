@@ -2,17 +2,30 @@ import { Container, Title, TopBar, Filters } from '@/components/shared';
 import { ProductsGroupList } from '@/components/shared/products-group-list';
 import { Suspense } from 'react';
 import { prisma } from '@/prisma/prisma-client';
+import { Category } from '@prisma/client';
+
 export default async function Home() {
   const categories = await prisma.category.findMany({
     include: {
       products: {
         include: {
-          ingredients: true,
           variations: true,
         },
       },
     },
   });
+
+  const formattedCategories = categories.map((category) => ({
+    ...category,
+    products: category.products.map((product) => ({
+      id: product.id,
+      name: product.name,
+      imageUrl: product.imageUrl || '',
+      items: product.variations.map((variation) => ({
+        price: variation.price,
+      })),
+    })),
+  }));
 
   return (
     <>
@@ -20,11 +33,7 @@ export default async function Home() {
         <Title text='All pizzas' size='lg' className='font-extrabold' />
       </Container>
 
-      <TopBar
-        categories={categories.filter(
-          (category) => category.products.length > 0
-        )}
-      />
+      <TopBar categories={formattedCategories} />
 
       <Container className='mt-10 pb-14'>
         <div className='flex gap-20'>
@@ -34,10 +43,10 @@ export default async function Home() {
               <Filters />
             </Suspense>
           </div>
-          {/* Product List*/}
+          {/* Product List */}
           <div className='flex-1'>
             <div className='flex flex-col gap-16'>
-              {categories.map(
+              {formattedCategories.map(
                 (category) =>
                   category.products.length > 0 && (
                     <ProductsGroupList

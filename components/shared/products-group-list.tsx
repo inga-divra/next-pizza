@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback, useRef } from 'react';
 import { Title } from './title';
 import { cn } from '@/lib/utils';
 import { ProductCard } from './product-card';
@@ -32,31 +32,37 @@ export const ProductsGroupList: React.FC<Props> = ({
   className,
 }) => {
   const setActiveCategoryId = useCategoryStore((state) => state.setActiveId);
-  const intersectionRef = React.useRef(null);
+  const intersectionRef = useRef(null);
   const intersection = useIntersection(intersectionRef, {
     threshold: 0.4,
   });
 
-  useEffect(() => {
+  const handleIntersection = useCallback(() => {
     if (intersection?.isIntersecting) {
       setActiveCategoryId(categoryId);
     }
-  }, [categoryId, intersection?.isIntersecting, title, setActiveCategoryId]);
+  }, [categoryId, intersection?.isIntersecting, setActiveCategoryId]);
+
+  useEffect(handleIntersection, [handleIntersection]);
 
   return (
     <div className={className} id={title} ref={intersectionRef}>
       <Title text={title} size='lg' className='font-extrabold mb-5' />
-      <div className={cn('grid grid-cols-3 gap-[50px]', listClassName)}>
-        {items.map((product) => (
-          <ProductCard
-            key={product.id}
-            id={product.id}
-            name={product.name}
-            imageUrl={product.imageUrl}
-            price={product.items?.[0]?.price ?? 0}
-          />
-        ))}
-      </div>
+      {items.length > 0 ? (
+        <div className={cn('grid grid-cols-3 gap-[50px]', listClassName)}>
+          {items.map((product) => (
+            <ProductCard
+              key={product.id}
+              id={product.id}
+              name={product.name}
+              imageUrl={product.imageUrl}
+              price={product.items?.[0]?.price ?? 0}
+            />
+          ))}
+        </div>
+      ) : (
+        <p className='text-gray-500'>No products available</p>
+      )}
     </div>
   );
 };

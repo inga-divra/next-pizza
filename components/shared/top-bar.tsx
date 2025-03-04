@@ -9,7 +9,7 @@ interface Props {
   categories: Category[];
   className?: string;
 }
-export const TopBar: React.FC<Props> = ({ categories, className }) => {
+export const TopBar: React.FC<Props> = ({ categories = [], className }) => {
   return (
     <div
       className={cn(
