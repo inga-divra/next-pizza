@@ -18,6 +18,7 @@ export const ProductImage: React.FC<Props> = ({
     <div className={className}>
       <Image
         src={imageUrl}
+        priority
         alt='Product image'
         className={cn(
           'relative left-2 top-2 transition-all z-10 duration-300',

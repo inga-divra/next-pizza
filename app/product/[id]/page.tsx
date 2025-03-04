@@ -2,11 +2,15 @@ import { Container, ProductImage } from '@/components/shared';
 import { prisma } from '@/prisma/prisma-client';
 import { notFound } from 'next/navigation';
 
-export default async function ProductPage({
-  params: { id },
-}: {
-  params: { id: string };
-}) {
+interface ProductPageProps {
+  params: {
+    id: string;
+  };
+}
+
+export default async function ProductPage({ params }: ProductPageProps) {
+  const { id } = await params;
+
   const product = await prisma.product.findFirst({
     where: {
       id: Number(id),
