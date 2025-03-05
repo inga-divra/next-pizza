@@ -1,31 +1,19 @@
-import { Container, Title, ProductImage } from '@/components/shared';
+import { Container, ProductImage, Title } from '@/components/shared';
 import { prisma } from '@/prisma/prisma-client';
 import { notFound } from 'next/navigation';
 
-interface ProductPageProps {
-  params: {
-    id: string;
-  };
-}
-
-export default async function ProductPage({ params }: ProductPageProps) {
-  const { id } = await params;
-
-  const productId = Number(id);
-
-  if (isNaN(productId)) {
-    return notFound();
-  }
-
+export default async function ProductPage({
+  params: { id },
+}: {
+  params: { id: string };
+}) {
   const product = await prisma.product.findFirst({
     where: {
-      id: productId,
+      id: Number(id),
     },
   });
 
-  if (!product) {
-    return notFound();
-  }
+  if (!product) return notFound();
 
   return (
     <Container className='flex flex-col my-10'>
