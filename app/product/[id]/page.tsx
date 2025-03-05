@@ -11,9 +11,15 @@ interface ProductPageProps {
 export default async function ProductPage({ params }: ProductPageProps) {
   const { id } = params;
 
+  const productId = Number(id);
+
+  if (isNaN(productId)) {
+    return notFound();
+  }
+
   const product = await prisma.product.findFirst({
     where: {
-      id: Number(id),
+      id: productId,
     },
   });
 
