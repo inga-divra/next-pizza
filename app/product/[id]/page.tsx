@@ -1,4 +1,4 @@
-import { Container, ProductImage, Title } from '@/components/shared';
+import { Container, Title, ProductImage } from '@/components/shared';
 import { prisma } from '@/prisma/prisma-client';
 import { notFound } from 'next/navigation';
 
@@ -9,7 +9,7 @@ interface ProductPageProps {
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
-  const { id } = params;
+  const { id } = await params;
 
   const productId = Number(id);
 
