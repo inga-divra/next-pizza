@@ -9,13 +9,12 @@ export default async function ProductPage({
   // Ensure params is awaited
   const { id } = await params;
 
-  // Получаем продукт
   const product = await prisma.product.findFirst({
     where: { id: Number(id) },
   });
 
   if (!product) {
-    notFound(); // Отображает страницу 404
+    notFound();
   }
 
   return (
